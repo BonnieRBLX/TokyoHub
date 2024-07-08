@@ -92,7 +92,7 @@ local UIPadding_2 = Instance.new("UIPadding")
 
 --Properties:
 
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.Parent = game.CoreGui
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 TokyoHub.Name = "TokyoHub"
@@ -631,7 +631,7 @@ Page.TextWrapped = true
 Page.TextXAlignment = Enum.TextXAlignment.Left
 
 Notification.Name = "Notification"
-Notification.Parent = game.StarterGui.ScreenGui.main
+Notification.Parent = ScreenGui:WaitForChild("main")
 Notification.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Notification.BackgroundTransparency = 1.000
 Notification.BorderColor3 = Color3.fromRGB(0, 0, 0)
@@ -735,7 +735,7 @@ local function WOUA_fake_script() -- Jump.LocalScript
 
 	script.Parent.Visible = game.Players.LocalPlayer.Character.Humanoid.JumpPower ~= nil
 	script.Parent.MouseButton1Click:Connect(function()
-			game.Players.LocalPlayer.Character.Humanoid.JumpPower = script.Parent.WalkSpeed.Text or 50
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = script.Parent.WalkSpeed.Text or 50
 	end)
 end
 coroutine.wrap(WOUA_fake_script)()
@@ -751,7 +751,7 @@ local function ZVKNE_fake_script() -- Jump_2.LocalScript
 
 	script.Parent.Visible = game.Players.LocalPlayer.Character.Humanoid.JumpHeight ~= nil
 	script.Parent.MouseButton1Click:Connect(function()
-			game.Players.LocalPlayer.Character.Humanoid.JumpHeight = script.Parent.WalkSpeed.Text or 7.2
+		game.Players.LocalPlayer.Character.Humanoid.JumpHeight = script.Parent.WalkSpeed.Text or 7.2
 	end)
 end
 coroutine.wrap(ZVKNE_fake_script)()
@@ -795,7 +795,7 @@ local function ZLRSHXS_fake_script() -- Players.LocalScript
 	local script = Instance.new('LocalScript', Players)
 
 	_G.SaveScriptsTOKYO = false
-	
+
 	script.Parent.Interactable = decompile ~= nil
 	script.Parent.AutoButtonColor = decompile ~= nil
 	script.Parent.Text = decompile ~= nil and "Save Scripts: FALSE" or "Save Scripts: NOT SUPPORTED"
@@ -829,9 +829,9 @@ local function IEGNIAT_fake_script() -- Players_2.LocalScript
 	local script = Instance.new('LocalScript', Players_2)
 
 	_G.FileNameTOKYO = game.PlaceId .. " " .. game.MarketplaceService:GetProductInfo(game.PlaceId, Enum.InfoType.Asset).Name
-	
+
 	script.Parent.Text = _G.FileNameTOKYO
-	
+
 	script.Parent.FocusLost:Connect(function()
 		_G.FileNameTOKYO = script.Parent.Text
 	end)
@@ -839,23 +839,23 @@ end
 coroutine.wrap(IEGNIAT_fake_script)()
 local function YSKX_fake_script() -- ScreenGui.main 
 	local script = Instance.new('LocalScript', ScreenGui)
-
+    script.Name = "main"
 	print("Tokyo Hub 1.0.0 by bxnnie")
-	
+
 	local tokyo = script.Parent:WaitForChild("TokyoHub")
 	local minimized = false 
-	
+
 	local closed = false 
-	
+
 	local uis = game:GetService("UserInputService")
 	local names = {
-	  PlaceSaver = "Place Saver",
-	  Universal = "Universal",
-	  Settings = "Settings"
+		PlaceSaver = "Place Saver",
+		Universal = "Universal",
+		Settings = "Settings"
 	}
-	
+
 	tokyo.Draggable = true 
-	
+
 	for i,v in pairs(tokyo.Main:GetDescendants()) do
 		if v:IsA("Frame") then
 			local value = Instance.new("NumberValue", v)
@@ -870,7 +870,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 			value1.Name = "TextTransparency"
 		end
 	end
-	
+
 	local function View(page)
 		for i, v in pairs(tokyo.Main.Frames:GetChildren()) do
 			if v:IsA("Frame") then
@@ -888,7 +888,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 			end
 		end
 	end
-	
+
 	function Notify(titletxt, text, type)
 		local Color = type == "e" and Color3.fromHSV(0, 0.596078, 1) or type == "i" and Color3.fromHSV(0.563722, 0.933333, 1) or type == "s" and Color3.fromHSV(0.297444, 0.564706, 1)
 		local notif = script.Notification:Clone()
@@ -896,7 +896,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 		notif.Main.Cooldown.BackgroundColor3 = Color
 		notif.Main.Title.TextColor3 = Color
 		notif.Main.Content.TextColor3 = Color
-	
+
 		notif.Main.Title.Text = string.upper(titletxt)
 		notif.Main.Content.Text = text
 		game.TweenService:Create(notif.Main.UIScale, TweenInfo.new(0.2), {Scale = 1}):Play()
@@ -906,7 +906,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 		wait(0.5)
 		notif:Destroy()
 	end
-	
+
 	tokyo.Minimize.MouseButton1Click:Connect(function()
 		if not minimized then
 			minimized = true
@@ -934,7 +934,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 			end
 		end
 	end)
-	
+
 	tokyo.Close.MouseButton1Click:Connect(function()
 		closed = not closed
 		game.TweenService:Create(tokyo.UIScale, TweenInfo.new(0.5), {Scale = closed and 0 or 1}):Play()
@@ -948,7 +948,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 			end
 		end
 	end)
-	
+
 	uis.InputBegan:Connect(function(i, gp)
 		if i.KeyCode == Enum.KeyCode.RightShift and not gp then
 			closed = not closed
@@ -977,7 +977,7 @@ local function YSKX_fake_script() -- ScreenGui.main
 			end
 		end
 	end)
-	
+
 	for i,v in pairs(tokyo.Main.Tabs.Main:GetChildren()) do
 		if v:IsA("Frame") then
 			v.Button.MouseButton1Click:Connect(function()
