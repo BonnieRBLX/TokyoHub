@@ -89,7 +89,9 @@ local Title_2 = Instance.new("TextLabel")
 local Notifications = Instance.new("Frame")
 local UIListLayout_2 = Instance.new("UIListLayout")
 local UIPadding_2 = Instance.new("UIPadding")
-
+local main = Instance.new("LocalScript")
+main.Parent = ScreenGui
+main.Name = "main"
 --Properties:
 
 ScreenGui.Parent = game.CoreGui
@@ -839,7 +841,6 @@ end
 coroutine.wrap(IEGNIAT_fake_script)()
 local function YSKX_fake_script() -- ScreenGui.main 
 	local script = Instance.new('LocalScript', ScreenGui)
-    script.Name = "main"
 	print("Tokyo Hub 1.0.0 by bxnnie")
 
 	local tokyo = script.Parent:WaitForChild("TokyoHub")
